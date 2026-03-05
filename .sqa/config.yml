@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/Ophidia
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/catalogue:
+      branch: main
+      repo: https://github.com/madgeek-arc/catalogue
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/catalogue git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-rose-reindeer.sh
+        container: qc.acc_boozy-brown-dodo
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/catalogue find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-goldenrod-coral.sh
+        container: qc.doc_trippy-brass-walrus
+      github.com/madgeek-arc/catalogue git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-chocolate-spoonbill.sh
+        container: qc.doc_paltry-cinnabar-flounder
+      github.com/madgeek-arc/catalogue markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-xanthic-frog.sh
+        container: qc.doc_crabby-fuchsia-quetzal
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/catalogue licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-sapphire-malamute.sh
+        container: qc.lic_woozy-cerulean-penguin
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/catalogue checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-smalt-woodpecker.sh
+        container: qc.sty_stinky-mauve-macaque
+      github.com/madgeek-arc/catalogue jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-bistre-labradoodle.sh
+        container: qc.sty_lanky-sapphire-havanese
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/catalogue get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-teal-moose.sh
+        container: qc.ver_sunny-puce-audemer
+timeout: 5400
